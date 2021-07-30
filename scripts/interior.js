@@ -7,7 +7,7 @@ document.addEventListener(
     (event) => {
         if (event.target.name === "style") {
             setInterior(parseInt(event.target.value))
-            window.alert(`User chose style ${event.target.value}`)
+            
         }
     }
 )

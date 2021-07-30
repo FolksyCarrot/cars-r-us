@@ -67,10 +67,18 @@ const database = {
         wheelType: "18-inch Spoke Black Radial",
         price: 3
     }],
-    customerOrders: [{
+    customerOrders: [
+        {
+            // paintId: 1,
+            // interiorId: 2,
+            // technologyId: 3,
+            // wheelId: 2,
+            // timestamp: 1614659931693
 
        
-    }]
+        }],
+
+    orderBuilder = {}
 
 }
 
@@ -90,23 +98,54 @@ export const getWheels = () => {
     return database.Wheels.map(wheel => ({...wheel}))
 }
 
+export const getOrders = () => {
+    return database.customerOrders.map(orders => ({...orders}))
+}
+
 
 
 export const setPaint = (id) => {
-    database.customerOrders.paintId = id
+    database.orderBuilder.paintId = id
 } 
 
 export const setInterior = (id) => {
-    database.customerOrders.interiorId = id
+    database.orderBuilder.interiorId = id
 }
 
 export const setTechnology = (id) => {
-    database.customerOrders.technologyId = id
+    database.orderBuilder.technologyId = id
 }
 
 export const setWheels = (id) => {
-    database.customerOrders.wheelId = id
+    database.orderBuilder.wheelId = id
 } 
 
 
-export const addCustomerOrder = () =>
+export const addCustomerOrder = () => {
+    //copy the object from the array that we want to use, so that it can be used elsewhere, without disrupting the database
+    const newCustomOrders = {...database.orderBuilder}
+
+    //adding a new ID/Primary Key to the CustomerOrders object. 
+    let lastIndex;
+    if (database.customerOrders.length === 0) {
+        lastIndex = 1
+        newCustomOrders.id = lastIndex
+    } else {
+        lastIndex = database.customerOrders.length -1
+        newCustomOrders.id = lastIndex + 1
+    }
+
+    // Add a timestamp to the order
+    newCustomOrder.timestamp = Date.now()
+
+    //push new object to permanent placeholder. i.e. orderbuilder is temporary because it resets after every button click. and customOrders is the permanent placeholder.
+    database.customerOrders.push(newCustomOrders)
+
+    // reset temporary placeholder
+    database.orderBuilder = {}
+
+    //custom event
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+
