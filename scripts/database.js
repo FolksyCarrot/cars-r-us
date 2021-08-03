@@ -69,16 +69,21 @@ const database = {
     }],
     customerOrders: [
         {
-            // paintId: 1,
-            // interiorId: 2,
-            // technologyId: 3,
-            // wheelId: 2,
-            // timestamp: 1614659931693
+            id: 1,
+            paintId: 1,
+            interiorId: 2,
+            wheelId: 2,
+            technologyId: 3
 
-       
         }],
 
-    orderBuilder = {}
+    orderBuilder : {},
+
+    types: [
+        {id: 1, value: "car"},
+        {id: 2, value: "suv"},
+        {id: 3, value: "truck"}
+    ]
 
 }
 
@@ -102,6 +107,10 @@ export const getOrders = () => {
     return database.customerOrders.map(orders => ({...orders}))
 }
 
+export const getTypes = () => {
+    return database.types.map(type => ({...type}))
+}
+
 
 
 export const setPaint = (id) => {
@@ -120,6 +129,10 @@ export const setWheels = (id) => {
     database.orderBuilder.wheelId = id
 } 
 
+export const setType = (id) => {
+    database.orderBuilder.typeId = id
+}
+
 
 export const addCustomerOrder = () => {
     //copy the object from the array that we want to use, so that it can be used elsewhere, without disrupting the database
@@ -136,7 +149,7 @@ export const addCustomerOrder = () => {
     }
 
     // Add a timestamp to the order
-    newCustomOrder.timestamp = Date.now()
+    newCustomOrders.timestamp = Date.now()
 
     //push new object to permanent placeholder. i.e. orderbuilder is temporary because it resets after every button click. and customOrders is the permanent placeholder.
     database.customerOrders.push(newCustomOrders)

@@ -3,20 +3,24 @@ import { technologyType } from "./technology.js"
 import { wheelColor } from "./wheels.js"
 import { interiorStyles } from "./interior.js"
 import { addCustomerOrder } from "./database.js"
-import { Orders } from "./database.js"
+import { Orders } from "./orders.js"
+import { modelType } from "./types.js"
 
 document.addEventListener(
-    "change",
+    "click",
     (event) => {
         if (event.target.id === "orderButton") {
             addCustomerOrder()
+            
            
         }
     }
 )
 
 
-export const mainHTML = ` 
+export const mainHTML = () => {
+    const HTML =
+    ` 
 <h1>Cars-R-Us</h1>
 <article class="choices">
     <section class="choices__paint options">
@@ -37,6 +41,11 @@ export const mainHTML = `
     </section>
 </article>
 
+<div>
+    <h2>Car Models</h2>
+    ${modelType()}
+</div>
+
 <article>
     <button id="orderButton">Create Custom Order</button>
 </article>
@@ -46,4 +55,7 @@ export const mainHTML = `
     <p>${Orders()}</p>
 </article>
 `
+return HTML
+}
+
 
