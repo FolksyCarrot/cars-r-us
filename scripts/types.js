@@ -12,11 +12,25 @@ document.addEventListener(
 
 export const modelType = () => {
     let HTML = "<ul>"
-    for (const types of Type) {
-        HTML += `<li> <input type="radio" name ="type" value = "${types.id}" /> ${types.value}</li>`
-        }   
+    const typeArray = Type.map(type => {
+        return `<li> <input type="radio" name ="type" value = "${type.id}" /> ${type.value}</li>`
+    })
+
+    HTML += typeArray.join("")
+    HTML += "</ul>"
+    return HTML
+
+
+
+
+
+    // the below code will also work starting at line 15
+    
+    // for (const types of Type) {
+    //     HTML += `<li> <input type="radio" name ="type" value = "${types.id}" /> ${types.value}</li>`
+    //     }   
         
-        HTML += "</ul>"
-        return HTML
+    //     HTML += "</ul>"
+    //     return HTML
 }
 
